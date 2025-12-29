@@ -572,7 +572,7 @@ button_card_templates:
     show_label: true
     entity: |
       [[[
-        if (user.name == "Julian") return "person.julian_";
+        if (user.name == "Julian") return "person.mehrose";
         else return "person." + user.name.toLowerCase();
       ]]]
     name: '[[[return "Hello, " + user.name +"!"]]]'
@@ -685,8 +685,8 @@ button_card_templates:
           type: custom:button-card
           entity: |
             [[[
-              if (user.name == "Julian") return "person.anna";
-              else return "person.julian_";
+              if (user.name == "Julian") return "person.vidushi";
+              else return "person.mehrose";
             ]]]
           show_name: false
           show_entity_picture: true
@@ -718,7 +718,7 @@ button_card_templates:
             [[[
               if (user.name == "Julian") return "person.dog";
               else if (user.name == "Anna") return "person.dog";
-              else return "person.anna";
+              else return "person.vidushi";
             ]]]
           show_name: false
           show_entity_picture: true
@@ -2477,7 +2477,7 @@ button_card_templates:
     show_label: true
     entity: |
       [[[
-        if (user.name == "Julian") return "person.julian_";
+        if (user.name == "Julian") return "person.mehrose";
         else return "person." + user.name.toLowerCase();
       ]]]
     name: '[[[return "Hello, " + user.name +"!"]]]'
@@ -4028,14 +4028,14 @@ views:
             {{ states("input_text.ai_morning_brief") }}
           {% elif (states("sensor.time_of_day") == "day") %}
             # Hey, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
           {% elif (states("sensor.time_of_day") == "evening") %}
             # Good Evening, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% elif (states("sensor.time_of_day") == "night") %}
             # Good Night, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% endif %}
         visibility:
@@ -4061,13 +4061,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_julians_iphone
+        entity: input_boolean.notifications_mehrose_phone
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_julians_iphone
+            entity: input_boolean.notifications_mehrose_phone
             state: 'off'
           - condition: user
             users:
@@ -4076,13 +4076,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_anna
+        entity: input_boolean.notifications_vidushi
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_anna
+            entity: input_boolean.notifications_vidushi
             state: 'off'
           - condition: user
             users:
@@ -4199,32 +4199,32 @@ views:
           - condition: state
             entity: sensor.washing_machine_status
             state_not: 'Off'
+      # - type: entity
+      #   show_name: false
+      #   show_state: true
+      #   show_icon: true
+      #   entity: sensor.prusalink_progress
+      #   icon: mdi:printer-3d
+      #   color: orange
+      #   visibility:
+      #     - condition: state
+      #       entity: sensor.prusalink
+      #       state: printing
+      #     - condition: user
+      #       users:
+      #         - 3eea636aa3de4c7f9c662ad29c6e92e0
+      #   tap_action:
+      #     action: navigate
+      #     navigation_path: server#3d-printer
       - type: entity
         show_name: false
         show_state: true
         show_icon: true
-        entity: sensor.prusalink_progress
-        icon: mdi:printer-3d
-        color: orange
-        visibility:
-          - condition: state
-            entity: sensor.prusalink
-            state: printing
-          - condition: user
-            users:
-              - 3eea636aa3de4c7f9c662ad29c6e92e0
-        tap_action:
-          action: navigate
-          navigation_path: server#3d-printer
-      - type: entity
-        show_name: false
-        show_state: true
-        show_icon: true
-        entity: vacuum.dobby
+        entity: vacuum.robovac_x10_pro_omni
         color: purple
         visibility:
           - condition: state
-            entity: vacuum.dobby
+            entity: vacuum.robovac_x10_pro_omni
             state_not: docked
         tap_action:
           action: navigate
@@ -4233,13 +4233,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: switch.fan_outlet
+        entity: switch.air_circulator_horizontally_oscillating
         color: blue
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: switch.fan_outlet
+            entity: switch.air_circulator_horizontally_oscillating
             state: 'on'
       - type: entity
         show_name: false
@@ -4281,7 +4281,7 @@ views:
                   - entity: alarm_control_panel.security_system
                     state_not: triggered
                   - condition: state
-                    entity: person.julian_
+                    entity: person.mehrose
                     state: home
               - condition: state
                 entity: input_boolean.sound_alarm_is_running
@@ -4453,8 +4453,8 @@ views:
           - condition: screen
             media_query: '(min-width: 768px)'
       - type: custom:mushroom-template-badge
-        entity: person.julian_
-        picture: '{{ state_attr("person.julian_","entity_picture") }}'
+        entity: person.mehrose
+        picture: '{{ state_attr("person.mehrose","entity_picture") }}'
         content: '{{ states("sensor.julians_apple_watch_area") }}'
         label: Julian
         visibility:
@@ -4502,13 +4502,13 @@ views:
                           type: custom:button-card
                           icon: |
                             [[[
-                              if (states['binary_sensor.heating'].state == "on") return "mdi:fire";
-                              else if (states['binary_sensor.heating_auto'].state == "off") return "mdi:thermometer";
+                              if (states['climate.rozenstraat_home'].state == "heat") return "mdi:fire";
+                              else if (states['climate.rozenstraat_home'].state == "off") return "mdi:thermometer";
                               else return "mdi:thermostat";
                             ]]]
                           name: Temperature
                           label: >-
-                            [[[ return states["sensor.temperature_mean"].state +
+                            [[[ return states["climate.rozenstraat_home"].current_temperature +
                             "°C" ]]]
                           show_label: true
                           styles:
@@ -4525,8 +4525,8 @@ views:
                               - width: 20px
                               - color: |
                                   [[[
-                                    if (states['binary_sensor.heating'].state == "on") return "var(--red)";
-                                    else if (states['binary_sensor.heating_auto'].state == "off") return "var(--green)";
+                                    if (states['climate.rozenstraat_home'].state == "heat") return "var(--red)";
+                                    else if (states['climate.rozenstraat_home'].state == "off") return "var(--green)";
                                     else return "var(--contrast10)";
                                   ]]]
                             img_cell:
@@ -4543,129 +4543,129 @@ views:
                           tap_action:
                             action: navigate
                             navigation_path: '#climate'
-                      item2:
-                        card:
-                          type: custom:button-card
-                          icon: mdi:lightning-bolt
-                          name: Energy
-                          label: >-
-                            [[[ return
-                            states["sensor.tasmota_power_power_curr"].state +
-                            "kwh" ]]]
-                          show_label: true
-                          styles:
-                            card:
-                              - border-radius: 0px
-                              - box-shadow: none
-                              - padding-right: 5px
-                              - background: none
-                            grid:
-                              - grid-template-areas: '''i n'' ''i l'''
-                              - grid-template-columns: min-content
-                              - column-gap: 10px
-                            icon:
-                              - width: 20px
-                              - color: var(--yellow)
-                            img_cell:
-                              - width: 20px
-                            name:
-                              - justify-self: start
-                              - font-size: 10px
-                              - font-weight: 500
-                              - color: var(--contrast14)
-                            label:
-                              - justify-self: start
-                              - font-size: 15px
-                              - font-weight: 700
-                          tap_action:
-                            action: navigate
-                            navigation_path: energy
-                      item3:
-                        card:
-                          type: custom:button-card
-                          icon: mdi:water-percent
-                          name: Humidity
-                          label: >-
-                            [[[ return states["sensor.humidity_mean"].state +
-                            "%"]]]
-                          show_label: true
-                          styles:
-                            card:
-                              - border-radius: 0px
-                              - box-shadow: none
-                              - padding-right: 5px
-                              - background: none
-                            grid:
-                              - grid-template-areas: '''i n'' ''i l'''
-                              - grid-template-columns: min-content
-                              - column-gap: 10px
-                            icon:
-                              - width: 20px
-                              - color: |
-                                  [[[
-                                    if (states['sensor.humidity_maximum'].state > "70") return "var(--red)";
-                                    else return "var(--blue)";
-                                  ]]]
-                            img_cell:
-                              - width: 20px
-                            name:
-                              - justify-self: start
-                              - font-size: 10px
-                              - font-weight: 500
-                              - color: var(--contrast14)
-                            label:
-                              - justify-self: start
-                              - font-size: 15px
-                              - font-weight: 700
-                          tap_action:
-                            action: navigate
-                            navigation_path: '#climate'
-                      item4:
-                        card:
-                          type: custom:button-card
-                          entity: binary_sensor.is_alarm_on
-                          icon: mdi:alarm-off
-                          name: Alarm
-                          label: '[[[ return states["sensor.wake_time_1"].state ]]]'
-                          show_label: true
-                          state:
-                            - value: 'on'
-                              icon: mdi:alarm
-                          styles:
-                            card:
-                              - border-radius: 0px
-                              - box-shadow: none
-                              - padding-right: 5px
-                              - background: none
-                            grid:
-                              - grid-template-areas: '''i n'' ''i l'''
-                              - grid-template-columns: min-content
-                              - column-gap: 10px
-                            icon:
-                              - width: 20px
-                              - color: |
-                                  [[[
-                                    if (states['binary_sensor.is_alarm_on'].state == "on") return "var(--yellow)";
-                                    else return "var(--contrast10)";
-                                  ]]]
-                            img_cell:
-                              - width: 20px
-                            name:
-                              - justify-self: start
-                              - font-size: 10px
-                              - font-weight: 500
-                              - color: var(--contrast14)
-                            label:
-                              - justify-self: start
-                              - font-size: 15px
-                              - font-weight: 700
-                          tap_action:
-                            action: navigate
-                            navigation_path: '#alarm'
+                      # item2:
+                      #   card:
+                      #     type: custom:button-card
+                      #     icon: mdi:lightning-bolt
+                      #     name: Energy
+                      #     label: >-
+                      #       [[[ return
+                      #       states["sensor.tasmota_power_power_curr"].state +
+                      #       "kwh" ]]]
+                      #     show_label: true
+                      #     styles:
+                      #       card:
+                      #         - border-radius: 0px
+                      #         - box-shadow: none
+                      #         - padding-right: 5px
+                      #         - background: none
+                      #       grid:
+                      #         - grid-template-areas: '''i n'' ''i l'''
+                      #         - grid-template-columns: min-content
+                      #         - column-gap: 10px
+                      #       icon:
+                      #         - width: 20px
+                      #         - color: var(--yellow)
+                      #       img_cell:
+                      #         - width: 20px
+                      #       name:
+                      #         - justify-self: start
+                      #         - font-size: 10px
+                      #         - font-weight: 500
+                      #         - color: var(--contrast14)
+                      #       label:
+                      #         - justify-self: start
+                      #         - font-size: 15px
+                      #         - font-weight: 700
+                      #     tap_action:
+                      #       action: navigate
+                      #       navigation_path: energy
+                      # item3:
+                      #   card:
+                      #     type: custom:button-card
+                      #     icon: mdi:water-percent
+                      #     name: Humidity
+                      #     label: >-
+                      #       [[[ return states["sensor.humidity_mean"].state +
+                      #       "%"]]]
+                      #     show_label: true
+                      #     styles:
+                      #       card:
+                      #         - border-radius: 0px
+                      #         - box-shadow: none
+                      #         - padding-right: 5px
+                      #         - background: none
+                      #       grid:
+                      #         - grid-template-areas: '''i n'' ''i l'''
+                      #         - grid-template-columns: min-content
+                      #         - column-gap: 10px
+                      #       icon:
+                      #         - width: 20px
+                      #         - color: |
+                      #             [[[
+                      #               if (states['sensor.humidity_maximum'].state > "70") return "var(--red)";
+                      #               else return "var(--blue)";
+                      #             ]]]
+                      #       img_cell:
+                      #         - width: 20px
+                      #       name:
+                      #         - justify-self: start
+                      #         - font-size: 10px
+                      #         - font-weight: 500
+                      #         - color: var(--contrast14)
+                      #       label:
+                      #         - justify-self: start
+                      #         - font-size: 15px
+                      #         - font-weight: 700
+                      #     tap_action:
+                      #       action: navigate
+                      #       navigation_path: '#climate'
+                      # item4:
+                      #   card:
+                      #     type: custom:button-card
+                      #     entity: binary_sensor.is_alarm_on
+                      #     icon: mdi:alarm-off
+                      #     name: Alarm
+                      #     label: '[[[ return states["sensor.wake_time_1"].state ]]]'
+                      #     show_label: true
+                      #     state:
+                      #       - value: 'on'
+                      #         icon: mdi:alarm
+                      #     styles:
+                      #       card:
+                      #         - border-radius: 0px
+                      #         - box-shadow: none
+                      #         - padding-right: 5px
+                      #         - background: none
+                      #       grid:
+                      #         - grid-template-areas: '''i n'' ''i l'''
+                      #         - grid-template-columns: min-content
+                      #         - column-gap: 10px
+                      #       icon:
+                      #         - width: 20px
+                      #         - color: |
+                      #             [[[
+                      #               if (states['binary_sensor.is_alarm_on'].state == "on") return "var(--yellow)";
+                      #               else return "var(--contrast10)";
+                      #             ]]]
+                      #       img_cell:
+                      #         - width: 20px
+                      #       name:
+                      #         - justify-self: start
+                      #         - font-size: 10px
+                      #         - font-weight: 500
+                      #         - color: var(--contrast14)
+                      #       label:
+                      #         - justify-self: start
+                      #         - font-size: 15px
+                      #         - font-weight: 700
+                      #     tap_action:
+                      #       action: navigate
+                      #       navigation_path: '#alarm'
                       item5:
                         card:
                           type: custom:button-card
-                          entity: vacuum.dobby
+                          entity: vacuum.robovac_x10_pro_omni
                           icon: mdi:robot-vacuum-alert
                           name: Dobby
                           label: Error
@@ -4715,14 +4715,14 @@ views:
                       item6:
                         card:
                           type: custom:button-card
-                          entity: weather.home
-                          name: Berlin
+                          entity: weather.forecast_home
+                          name: Haarlem
                           show_label: true
                           show_state: true
                           show_name: false
                           label: >-
                             [[[ return
-                            states["weather.home"].attributes.temperature + "°C"
+                            states["weather.forecast_home"].attributes.temperature + "°C"
                             ]]]
                           styles:
                             card:
@@ -4738,8 +4738,8 @@ views:
                               - width: 20px
                               - color: |
                                   [[[
-                                    if (states['weather.home'].state == "partlycloudy") return "var(--contrast15)";
-                                    else if (states['weather.home'].state == "sunny") return "var(--yellow)";
+                                    if (states['weather.forecast_home'].state == "partlycloudy") return "var(--contrast15)";
+                                    else if (states['weather.forecast_home'].state == "sunny") return "var(--yellow)";
                                     else return "var(--blue)";
                                   ]]]
                             img_cell:
@@ -4771,7 +4771,7 @@ views:
                   - type: entity
                     show_state: false
                     show_icon: true
-                    entity: person.julian_
+                    entity: person.mehrose
                     icon: mdi:face-agent
                     color: green
                     tap_action:
@@ -4779,7 +4779,7 @@ views:
                   - type: entity
                     show_state: false
                     show_icon: true
-                    entity: person.anna
+                    entity: person.vidushi
                     icon: mdi:face-woman
                     color: purple
                     tap_action:
@@ -4824,17 +4824,17 @@ views:
                     entity: switch.coffee_maker_outlet
                     state_not: 'on'
                   - condition: state
-                    entity: switch.fan_outlet
+                    entity: switch.air_circulator_horizontally_oscillating
                     state_not: 'on'
                   - condition: state
                     entity: switch.desk_webcam
                     state_not: 'on'
                   - condition: state
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     state_not: cleaning
-                  - condition: state
-                    entity: sensor.prusalink_progress
-                    state: unavailable
+                  # - condition: state
+                  #   entity: sensor.prusalink_progress
+                  #   state: unavailable
                   - condition: state
                     entity: remote.harmony_hub
                     state: 'off'
@@ -4851,7 +4851,7 @@ views:
             entities:
               - entity: zone.home
               - entity: person.dog
-              - entity: person.julian_
+              - entity: person.mehrose
             theme_mode: auto
             visibility:
               - condition: state
@@ -4869,17 +4869,17 @@ views:
                     entity: switch.coffee_maker_outlet
                     state_not: 'on'
                   - condition: state
-                    entity: switch.fan_outlet
+                    entity: switch.air_circulator_horizontally_oscillating
                     state_not: 'on'
                   - condition: state
                     entity: switch.desk_webcam
                     state_not: 'on'
                   - condition: state
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     state_not: cleaning
-                  - condition: state
-                    entity: sensor.prusalink_progress
-                    state: unavailable
+                  # - condition: state
+                  #   entity: sensor.prusalink_progress
+                  #   state: unavailable
                   - condition: state
                     entity: remote.harmony_hub
                     state: 'off'
@@ -4984,17 +4984,17 @@ views:
                     entity: switch.coffee_maker_outlet
                     state: 'on'
                   - condition: state
-                    entity: switch.fan_outlet
+                    entity: switch.air_circulator_horizontally_oscillating
                     state: 'on'
                   - condition: state
                     entity: switch.desk_webcam
                     state: 'on'
                   - condition: state
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     state: cleaning
-                  - condition: state
-                    entity: sensor.prusalink_progress
-                    state_not: unavailable
+                  # - condition: state
+                  #   entity: sensor.prusalink_progress
+                  #   state_not: unavailable
                   - condition: state
                     entity: remote.harmony_hub
                     state_not: 'off'
@@ -5136,11 +5136,11 @@ views:
                     - type: conditional
                       conditions:
                         - condition: state
-                          entity: switch.fan_outlet
+                          entity: switch.air_circulator_horizontally_oscillating
                           state: 'on'
                       card:
                         type: custom:button-card
-                        entity: switch.fan_outlet
+                        entity: switch.air_circulator_horizontally_oscillating
                         template: switch_template
                         name: Fan
                         variables:
@@ -5151,14 +5151,14 @@ views:
                 - type: conditional
                   conditions:
                     - condition: state
-                      entity: vacuum.dobby
+                      entity: vacuum.robovac_x10_pro_omni
                       state_not: docked
                     - condition: state
-                      entity: vacuum.dobby
+                      entity: vacuum.robovac_x10_pro_omni
                       state_not: unavailable
                   card:
                     type: custom:button-card
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     name: Dobby
                     icon: |
                       [[[
@@ -5184,8 +5184,8 @@ views:
                       action: call-service
                       service: vacuum.return_to_base
                       service_data:
-                        entity_id: vacuum.dobby
-                    label: '[[[ return states["vacuum.dobby"].state ]]]'
+                        entity_id: vacuum.robovac_x10_pro_omni
+                    label: '[[[ return states["vacuum.robovac_x10_pro_omni"].state ]]]'
                     custom_fields:
                       icon1:
                         card:
@@ -6028,320 +6028,320 @@ views:
                                 - color: var(--contrast20)
                             hold_action:
                               action: more-info
-                - type: conditional
-                  conditions:
-                    - condition: state
-                      entity: sensor.prusalink
-                      state_not: unavailable
-                  card:
-                    type: custom:button-card
-                    entity: sensor.prusalink
-                    name: |
-                      [[[
-                        if (states['sensor.prusalink'].state == 'printing') {
-                          return states['sensor.prusalink_filename'].state;
-                        } else {
-                          return 'Prusa Mini+';
-                        }
-                      ]]]
-                    icon: mdi:printer-3d
-                    show_name: true
-                    show_icon: true
-                    show_label: true
-                    show_state: false
-                    tap_action:
-                      action: navigate
-                      navigation_path: server#3d-printer
-                    hold_action:
-                      action: more-info
-                    label: |
-                      [[[
-                        if (states['sensor.prusalink'].state != 'unavailable') {
-                          return states['sensor.prusalink'].state;
-                        } else {
-                          return 'Off';
-                        }
-                      ]]]
-                    custom_fields:
-                      bar: |
-                        [[[
-                          var color = "var(--green)";
-                          var state = states['sensor.prusalink_progress'].state;
-                          if (state < 10) color = "var(--red)";
-                          else if (state < 50) color = "var(--yellow)";
-                          else if (state < 90) color = "var(--orange)";
-                          return `
-                          <div>
-                          <div style="background:${color}; height: 12px; width:${state}%">
-                          </div>
-                          </div>`
-                        ]]]
-                      rem:
-                        card:
-                          type: conditional
-                          conditions:
-                            - condition: state
-                              entity: sensor.prusalink
-                              state: printing
-                          card:
-                            type: custom:button-card
-                            entity: sensor.prusamini_timer
-                            name: |
-                              [[[
-                               var remainingTime = states['sensor.prusamini_timer'].attributes.remaining;
-                               return `Time: ${remainingTime}`;
-                              ]]]
-                            show_icon: false
-                            styles:
-                              card:
-                                - width: min
-                                - background: none
-                                - overflow: visible
-                              name:
-                                - font-size: 12px
-                                - color: |
-                                    [[[
-                                      if (entity.state == 'on') {
-                                        return 'var(--black)';
-                                      } else {
-                                        return 'var(--primary-background-color)';
-                                      }
-                                    ]]]
-                                - font-weight: 500
-                      start:
-                        card:
-                          type: conditional
-                          conditions:
-                            - condition: state
-                              entity: sensor.prusa_mini
-                              state: printing
-                          card:
-                            type: custom:button-card
-                            entity: sensor.prusamini_timer
-                            name: |
-                              [[[
-                               var endTime = states['sensor.prusamini_timer'].attributes.triggered;
-                               // Extract time from the end time
-                               var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
-                               return `${time} Uhr`;
-                               ]]]
-                            show_icon: false
-                            styles:
-                              card:
-                                - width: min
-                                - padding: 5px
-                                - background: none
-                              name:
-                                - font-size: 12px
-                                - color: |
-                                    [[[
-                                      if (entity.state == 'on') {
-                                        return 'var(--black)';
-                                      } else {
-                                        return 'var(--primary-background-color)';
-                                      }
-                                    ]]]
-                      end:
-                        card:
-                          type: conditional
-                          conditions:
-                            - condition: state
-                              entity: sensor.prusalink
-                              state: printing
-                          card:
-                            type: custom:button-card
-                            entity: sensor.prusamini_timer
-                            name: |
-                              [[[
-                               var endTime = states['sensor.prusamini_timer'].attributes.end_time;
-                               // Extract time from the end time
-                               var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
-                               return `${time} Uhr`;
-                               ]]]
-                            show_icon: false
-                            styles:
-                              card:
-                                - width: min
-                                - padding: 5px
-                                - background: none
-                              name:
-                                - font-size: 12px
-                                - color: |
-                                    [[[
-                                      if (entity.state == 'on') {
-                                        return 'var(--black)';
-                                      } else {
-                                        return 'var(--primary-background-color)';
-                                      }
-                                    ]]]
-                      icon1:
-                        card:
-                          type: custom:button-card
-                          icon: mdi:printer-3d
-                          styles:
-                            card:
-                              - background-color: var(--contrast1)
-                              - width: 30px
-                              - height: 30px
-                            icon:
-                              - width: 18px
-                              - color: var(--contrast20)
-                    styles:
-                      grid:
-                        - grid-template-areas: >-
-                            ". icon1" "l l" "n n" "rem rem" "bar bar" "start
-                            end"
-                        - grid-template-rows: 24px 1fr 24px min-content min-content min-content
-                        - grid-template-columns: 60% 40%
-                      card:
-                        - height: 100%
-                        - padding: 1rem
-                        - background: |
-                            [[[
-                              if (entity.state == 'printing') {
-                                return 'var(--purple)';
-                              } else if (entity.state == 'attention') {
-                                return 'var(--red)';
-                              } else if (entity.state == 'error') {
-                                return 'var(--red)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--green)';
-                              } else {
-                                return 'var(--contrast2)';
-                              }
-                            ]]]
-                      img_cell:
-                        - position: absolute
-                        - top: 20%
-                        - left: 40%
-                        - overflow: visible
-                      icon:
-                        - position: absolute
-                        - width: 20em
-                        - opacity: 20%
-                        - color: |
-                            [[[
-                              if (entity.state == 'printing') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'attention') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'error') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--black)';
-                              } else {
-                                return 'var(--contrast20)';
-                              }
-                            ]]]
-                        - transform: rotate(-20deg)
-                      label:
-                        - text-align: left
-                        - font-size: 18px
-                        - font-weight: 500
-                        - justify-self: start
-                        - align-self: end
-                        - overflow: visible
-                        - color: |
-                            [[[
-                              if (entity.state == 'printing') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'attention') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'error') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--black)';
-                              } else {
-                                return 'var(--contrast20)';
-                              }
-                            ]]]
-                      name:
-                        - text-align: left
-                        - font-size: 12px
-                        - opacity: 0.7
-                        - justify-self: start
-                        - align-self: center
-                        - overflow: visible
-                        - color: |
-                            [[[
-                              if (entity.state == 'printing') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'attention') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'error') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--black)';
-                              } else {
-                                return 'var(--contrast20)';
-                              }
-                            ]]]
-                      custom_fields:
-                        bar:
-                          - justify-self: start
-                          - width: 100%
-                          - height: |
-                              [[[
-                                if (entity.state == 'printing') {
-                                  return '12px';
-                                } else {
-                                  return '0px';
-                                }
-                              ]]]
-                          - background: var(--contrast1)
-                          - border-radius: 24px
-                        end:
-                          - justify-self: end
-                        start:
-                          - justify-self: start
-                        rem:
-                          - justify-self: start
-                          - align-self: end
-                          - height: |
-                              [[[
-                                if (entity.state == 'printing') {
-                                  return '27px';
-                                } else {
-                                  return '0px';
-                                }
-                              ]]]
-                        icon1:
-                          - justify-self: end
-                          - width: 24px
-                          - color: |
-                              [[[
-                                if (entity.state == 'printing') {
-                                  return 'var(--black)';
-                                } else if (entity.state == 'attention') {
-                                  return 'var(--black)';
-                                } else if (entity.state == 'error') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--black)';
-                                } else {
-                                  return 'var(--contrast20)';
-                                }
-                              ]]]
-                        icon2:
-                          - justify-self: end
-                          - align-self: end
-                          - width: 24px
-                          - color: |
-                              [[[
-                                if (entity.state == 'printing') {
-                                  return 'var(--black)';
-                                } else if (entity.state == 'attention') {
-                                  return 'var(--black)';
-                                } else if (entity.state == 'error') {
-                                return 'var(--black)';
-                              } else if (entity.state == 'finished') {
-                                return 'var(--black)';
-                                } else {
-                                  return 'var(--contrast20)';
-                                }
-                              ]]]
-                      hold_action:
-                        action: more-info
+                # - type: conditional
+                #   conditions:
+                #     - condition: state
+                #       entity: sensor.prusalink
+                #       state_not: unavailable
+                #   card:
+                #     type: custom:button-card
+                #     entity: sensor.prusalink
+                #     name: |
+                #       [[[
+                #         if (states['sensor.prusalink'].state == 'printing') {
+                #           return states['sensor.prusalink_filename'].state;
+                #         } else {
+                #           return 'Prusa Mini+';
+                #         }
+                #       ]]]
+                #     icon: mdi:printer-3d
+                #     show_name: true
+                #     show_icon: true
+                #     show_label: true
+                #     show_state: false
+                #     tap_action:
+                #       action: navigate
+                #       navigation_path: server#3d-printer
+                #     hold_action:
+                #       action: more-info
+                #     label: |
+                #       [[[
+                #         if (states['sensor.prusalink'].state != 'unavailable') {
+                #           return states['sensor.prusalink'].state;
+                #         } else {
+                #           return 'Off';
+                #         }
+                #       ]]]
+                #     custom_fields:
+                #       bar: |
+                #         [[[
+                #           var color = "var(--green)";
+                #           var state = states['sensor.prusalink_progress'].state;
+                #           if (state < 10) color = "var(--red)";
+                #           else if (state < 50) color = "var(--yellow)";
+                #           else if (state < 90) color = "var(--orange)";
+                #           return `
+                #           <div>
+                #           <div style="background:${color}; height: 12px; width:${state}%">
+                #           </div>
+                #           </div>`
+                #         ]]]
+                #       rem:
+                #         card:
+                #           type: conditional
+                #           conditions:
+                #             - condition: state
+                #               entity: sensor.prusalink
+                #               state: printing
+                #           card:
+                #             type: custom:button-card
+                #             entity: sensor.prusamini_timer
+                #             name: |
+                #               [[[
+                #                var remainingTime = states['sensor.prusamini_timer'].attributes.remaining;
+                #                return `Time: ${remainingTime}`;
+                #               ]]]
+                #             show_icon: false
+                #             styles:
+                #               card:
+                #                 - width: min
+                #                 - background: none
+                #                 - overflow: visible
+                #               name:
+                #                 - font-size: 12px
+                #                 - color: |
+                #                     [[[
+                #                       if (entity.state == 'on') {
+                #                         return 'var(--black)';
+                #                       } else {
+                #                         return 'var(--primary-background-color)';
+                #                       }
+                #                     ]]]
+                #                 - font-weight: 500
+                #       start:
+                #         card:
+                #           type: conditional
+                #           conditions:
+                #             - condition: state
+                #               entity: sensor.prusa_mini
+                #               state: printing
+                #           card:
+                #             type: custom:button-card
+                #             entity: sensor.prusamini_timer
+                #             name: |
+                #               [[[
+                #                var endTime = states['sensor.prusamini_timer'].attributes.triggered;
+                #                // Extract time from the end time
+                #                var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+                #                return `${time} Uhr`;
+                #                ]]]
+                #             show_icon: false
+                #             styles:
+                #               card:
+                #                 - width: min
+                #                 - padding: 5px
+                #                 - background: none
+                #               name:
+                #                 - font-size: 12px
+                #                 - color: |
+                #                     [[[
+                #                       if (entity.state == 'on') {
+                #                         return 'var(--black)';
+                #                       } else {
+                #                         return 'var(--primary-background-color)';
+                #                       }
+                #                     ]]]
+                #       end:
+                #         card:
+                #           type: conditional
+                #           conditions:
+                #             - condition: state
+                #               entity: sensor.prusalink
+                #               state: printing
+                #           card:
+                #             type: custom:button-card
+                #             entity: sensor.prusamini_timer
+                #             name: |
+                #               [[[
+                #                var endTime = states['sensor.prusamini_timer'].attributes.end_time;
+                #                // Extract time from the end time
+                #                var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+                #                return `${time} Uhr`;
+                #                ]]]
+                #             show_icon: false
+                #             styles:
+                #               card:
+                #                 - width: min
+                #                 - padding: 5px
+                #                 - background: none
+                #               name:
+                #                 - font-size: 12px
+                #                 - color: |
+                #                     [[[
+                #                       if (entity.state == 'on') {
+                #                         return 'var(--black)';
+                #                       } else {
+                #                         return 'var(--primary-background-color)';
+                #                       }
+                #                     ]]]
+                #       icon1:
+                #         card:
+                #           type: custom:button-card
+                #           icon: mdi:printer-3d
+                #           styles:
+                #             card:
+                #               - background-color: var(--contrast1)
+                #               - width: 30px
+                #               - height: 30px
+                #             icon:
+                #               - width: 18px
+                #               - color: var(--contrast20)
+                #     styles:
+                #       grid:
+                #         - grid-template-areas: >-
+                #             ". icon1" "l l" "n n" "rem rem" "bar bar" "start
+                #             end"
+                #         - grid-template-rows: 24px 1fr 24px min-content min-content min-content
+                #         - grid-template-columns: 60% 40%
+                #       card:
+                #         - height: 100%
+                #         - padding: 1rem
+                #         - background: |
+                #             [[[
+                #               if (entity.state == 'printing') {
+                #                 return 'var(--purple)';
+                #               } else if (entity.state == 'attention') {
+                #                 return 'var(--red)';
+                #               } else if (entity.state == 'error') {
+                #                 return 'var(--red)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--green)';
+                #               } else {
+                #                 return 'var(--contrast2)';
+                #               }
+                #             ]]]
+                #       img_cell:
+                #         - position: absolute
+                #         - top: 20%
+                #         - left: 40%
+                #         - overflow: visible
+                #       icon:
+                #         - position: absolute
+                #         - width: 20em
+                #         - opacity: 20%
+                #         - color: |
+                #             [[[
+                #               if (entity.state == 'printing') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'attention') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'error') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--black)';
+                #               } else {
+                #                 return 'var(--contrast20)';
+                #               }
+                #             ]]]
+                #         - transform: rotate(-20deg)
+                #       label:
+                #         - text-align: left
+                #         - font-size: 18px
+                #         - font-weight: 500
+                #         - justify-self: start
+                #         - align-self: end
+                #         - overflow: visible
+                #         - color: |
+                #             [[[
+                #               if (entity.state == 'printing') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'attention') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'error') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--black)';
+                #               } else {
+                #                 return 'var(--contrast20)';
+                #               }
+                #             ]]]
+                #       name:
+                #         - text-align: left
+                #         - font-size: 12px
+                #         - opacity: 0.7
+                #         - justify-self: start
+                #         - align-self: center
+                #         - overflow: visible
+                #         - color: |
+                #             [[[
+                #               if (entity.state == 'printing') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'attention') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'error') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--black)';
+                #               } else {
+                #                 return 'var(--contrast20)';
+                #               }
+                #             ]]]
+                #       custom_fields:
+                #         bar:
+                #           - justify-self: start
+                #           - width: 100%
+                #           - height: |
+                #               [[[
+                #                 if (entity.state == 'printing') {
+                #                   return '12px';
+                #                 } else {
+                #                   return '0px';
+                #                 }
+                #               ]]]
+                #           - background: var(--contrast1)
+                #           - border-radius: 24px
+                #         end:
+                #           - justify-self: end
+                #         start:
+                #           - justify-self: start
+                #         rem:
+                #           - justify-self: start
+                #           - align-self: end
+                #           - height: |
+                #               [[[
+                #                 if (entity.state == 'printing') {
+                #                   return '27px';
+                #                 } else {
+                #                   return '0px';
+                #                 }
+                #               ]]]
+                #         icon1:
+                #           - justify-self: end
+                #           - width: 24px
+                #           - color: |
+                #               [[[
+                #                 if (entity.state == 'printing') {
+                #                   return 'var(--black)';
+                #                 } else if (entity.state == 'attention') {
+                #                   return 'var(--black)';
+                #                 } else if (entity.state == 'error') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--black)';
+                #                 } else {
+                #                   return 'var(--contrast20)';
+                #                 }
+                #               ]]]
+                #         icon2:
+                #           - justify-self: end
+                #           - align-self: end
+                #           - width: 24px
+                #           - color: |
+                #               [[[
+                #                 if (entity.state == 'printing') {
+                #                   return 'var(--black)';
+                #                 } else if (entity.state == 'attention') {
+                #                   return 'var(--black)';
+                #                 } else if (entity.state == 'error') {
+                #                 return 'var(--black)';
+                #               } else if (entity.state == 'finished') {
+                #                 return 'var(--black)';
+                #                 } else {
+                #                   return 'var(--contrast20)';
+                #                 }
+                #               ]]]
+                #       hold_action:
+                #         action: more-info
                 - type: horizontal-stack
                   cards:
                     - type: conditional
@@ -7130,7 +7130,7 @@ views:
                           state_not: idle
                         - entity: media_player.spotify_julian_
                           state_not: unavailable
-                        - entity: person.julian_
+                        - entity: person.mehrose
                           state: home
                       card:
                         type: custom:button-card
@@ -7419,7 +7419,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.julian_
+                    entity: person.mehrose
                     tap_action:
                       action: more-info
                     state:
@@ -7507,7 +7507,7 @@ views:
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.julian_'].state;
+                              return states['person.mehrose'].state;
                             ]]]
                           state:
                             - value: home
@@ -7572,7 +7572,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.anna
+                    entity: person.vidushi
                     tap_action:
                       action: more-info
                     state:
@@ -7654,11 +7654,11 @@ views:
                       state:
                         card:
                           type: custom:button-card
-                          entity: person.anna
+                          entity: person.vidushi
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.anna'].state;
+                              return states['person.vidushi'].state;
                             ]]]
                           state:
                             - value: home
@@ -8181,7 +8181,7 @@ views:
                   - type: entity
                     show_state: false
                     show_icon: true
-                    entity: binary_sensor.heating
+                    entity: climate.rozenstraat_home
                     icon: mdi:thermometer
                     color: red
                 tap_action:
@@ -8271,7 +8271,7 @@ views:
                 columns: 2
             visibility:
               - condition: state
-                entity: binary_sensor.heating_auto
+                entity: climate.rozenstraat_home
                 state: 'on'
           - type: vertical-stack
             cards:
@@ -8600,13 +8600,13 @@ views:
                           type: custom:button-card
                           icon: |
                             [[[
-                              if (states['binary_sensor.heating'].state == "on") return "mdi:fire";
-                              else if (states['binary_sensor.heating_auto'].state == "off") return "mdi:thermometer";
+                              if (states['climate.rozenstraat_home'].state == "heat") return "mdi:fire";
+                              else if (states['climate.rozenstraat_home'].state == "off") return "mdi:thermometer";
                               else return "mdi:thermostat";
                             ]]]
                           name: Temperature
                           label: >-
-                            [[[ return states["sensor.temperature_mean"].state +
+                            [[[ return states["climate.rozenstraat_home"].current_temperature +
                             "°C" ]]]
                           show_label: true
                           styles:
@@ -8622,8 +8622,8 @@ views:
                               - width: 20px
                               - color: |
                                   [[[
-                                    if (states['binary_sensor.heating'].state == "on") return "var(--red)";
-                                    else if (states['binary_sensor.heating_auto'].state == "off") return "var(--green)";
+                                    if (states['climate.rozenstraat_home'].state == "heat") return "var(--red)";
+                                    else if (states['climate.rozenstraat_home'].state == "off") return "var(--green)";
                                     else return "var(--contrast10)";
                                   ]]]
                             img_cell:
@@ -8887,7 +8887,7 @@ views:
                       item2:
                         card:
                           type: custom:button-card
-                          entity: vacuum.dobby
+                          entity: vacuum.robovac_x10_pro_omni
                           icon: mdi:robot-vacuum-alert
                           name: Dobby
                           label: Error
@@ -8933,73 +8933,73 @@ views:
                             navigation_path: '#vacuum'
                           double_tap_action:
                             action: more-info
-                      item3:
-                        card:
-                          type: custom:button-card
-                          entity: sensor.prusa_mini
-                          icon: mdi:printer-3d-nozzle-alert
-                          name: 3D Printer
-                          label: Error
-                          show_label: true
-                          state:
-                            - value: unavailable
-                              label: 'Off'
-                              icon: mdi:printer-3d-off
-                              styles:
-                                icon:
-                                  - color: var(--contrast10)
-                            - value: unknown
-                              label: 'Off'
-                              icon: mdi:printer-3d-off
-                              styles:
-                                icon:
-                                  - color: var(--contrast10)
-                            - value: idle
-                              label: Idle
-                              icon: mdi:printer-3d
-                              styles:
-                                icon:
-                                  - color: var(--contrast20)
-                            - value: printing
-                              label: Printing
-                              icon: mdi:printer-3d-nozzle
-                              styles:
-                                icon:
-                                  - color: var(--purple)
-                            - value: finished
-                              label: Done
-                              icon: mdi:printer-3d
-                              styles:
-                                icon:
-                                  - color: var(--green)
-                          styles:
-                            card:
-                              - border-radius: 0px
-                              - box-shadow: none
-                              - padding-right: 5px
-                            grid:
-                              - grid-template-areas: '''i n'' ''i l'''
-                              - grid-template-columns: min-content
-                              - column-gap: 10px
-                            icon:
-                              - width: 20px
-                              - color: var(--red)
-                            img_cell:
-                              - width: 20px
-                            name:
-                              - justify-self: start
-                              - font-size: 10px
-                              - font-weight: 500
-                              - color: var(--contrast14)
-                            label:
-                              - justify-self: start
-                              - font-size: 15px
-                              - font-weight: 700
-                          tap_action:
-                            action: navigate
-                            navigation_path: server#3d-printer
-                          double_tap_action:
-                            action: more-info
+                      # item3:
+                      #   card:
+                      #     type: custom:button-card
+                      #     entity: sensor.prusa_mini
+                      #     icon: mdi:printer-3d-nozzle-alert
+                      #     name: 3D Printer
+                      #     label: Error
+                      #     show_label: true
+                      #     state:
+                      #       - value: unavailable
+                      #         label: 'Off'
+                      #         icon: mdi:printer-3d-off
+                      #         styles:
+                      #           icon:
+                      #             - color: var(--contrast10)
+                      #       - value: unknown
+                      #         label: 'Off'
+                      #         icon: mdi:printer-3d-off
+                      #         styles:
+                      #           icon:
+                      #             - color: var(--contrast10)
+                      #       - value: idle
+                      #         label: Idle
+                      #         icon: mdi:printer-3d
+                      #         styles:
+                      #           icon:
+                      #             - color: var(--contrast20)
+                      #       - value: printing
+                      #         label: Printing
+                      #         icon: mdi:printer-3d-nozzle
+                      #         styles:
+                      #           icon:
+                      #             - color: var(--purple)
+                      #       - value: finished
+                      #         label: Done
+                      #         icon: mdi:printer-3d
+                      #         styles:
+                      #           icon:
+                      #             - color: var(--green)
+                      #     styles:
+                      #       card:
+                      #         - border-radius: 0px
+                      #         - box-shadow: none
+                      #         - padding-right: 5px
+                      #       grid:
+                      #         - grid-template-areas: '''i n'' ''i l'''
+                      #         - grid-template-columns: min-content
+                      #         - column-gap: 10px
+                      #       icon:
+                      #         - width: 20px
+                      #         - color: var(--red)
+                      #       img_cell:
+                      #         - width: 20px
+                      #       name:
+                      #         - justify-self: start
+                      #         - font-size: 10px
+                      #         - font-weight: 500
+                      #         - color: var(--contrast14)
+                      #       label:
+                      #         - justify-self: start
+                      #         - font-size: 15px
+                      #         - font-weight: 700
+                      #     tap_action:
+                      #       action: navigate
+                      #       navigation_path: server#3d-printer
+                      #     double_tap_action:
+                      #       action: more-info
             visibility:
               - condition: screen
                 media_query: '(min-width: 0px) and (max-width: 767px)'
@@ -9412,7 +9412,7 @@ views:
                         tap_action:
                           action: navigate
                           navigation_path: '#alarm'
-                      - entity: switch.fan_outlet
+                      - entity: switch.air_circulator_horizontally_oscillating
                         tap_action:
                           action: toggle
                     force_icon: false
@@ -9438,8 +9438,8 @@ views:
                       }
 
                       .bubble-sub-button-2 {
-                          background-color: ${hass.states['switch.fan_outlet'].state === 'on' ? 'var(--blue)' : 'var(--contrast3)'} !important;
-                          color: ${hass.states['switch.fan_outlet'].state === 'on' ? 'var(--black)' : 'var(--contrast20)'} !important;
+                          background-color: ${hass.states['switch.air_circulator_horizontally_oscillating'].state === 'on' ? 'var(--blue)' : 'var(--contrast3)'} !important;
+                          color: ${hass.states['switch.air_circulator_horizontally_oscillating'].state === 'on' ? 'var(--black)' : 'var(--contrast20)'} !important;
                       }
 
                       ${icon.setAttribute("icon",
@@ -9569,16 +9569,16 @@ views:
                       target:
                         entity_id: light.guest_room_lights
                     sub_button:
-                      - entity: sensor.prusalink_progress
-                        icon: mdi:printer-3d-nozzle
-                        show_state: true
-                        visibility:
-                          - condition: state
-                            entity: sensor.prusalink_progress
-                            state_not: unavailable
-                        tap_action:
-                          action: navigate
-                          navigation_path: 3d-printer
+                      # - entity: sensor.prusalink_progress
+                      #   icon: mdi:printer-3d-nozzle
+                      #   show_state: true
+                      #   visibility:
+                      #     - condition: state
+                      #       entity: sensor.prusalink_progress
+                      #       state_not: unavailable
+                      #   tap_action:
+                      #     action: navigate
+                      #     navigation_path: 3d-printer
                       - entity: media_player.guest_room
                         icon: mdi:music
                         tap_action:
@@ -11260,7 +11260,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: switch.fan_outlet
+                    entity: switch.air_circulator_horizontally_oscillating
                     name: Fan
                     template: switch_template
                     variables:
@@ -11796,7 +11796,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     name: Vacuum
                     template: nav_button_state_small
                     variables:
@@ -11933,7 +11933,7 @@ views:
                     conditions:
                       - entity: media_player.spotify_julian_
                         state_not: idle
-                      - entity: person.julian_
+                      - entity: person.mehrose
                         state: home
                     card:
                       type: custom:button-card
@@ -13491,29 +13491,29 @@ views:
                     color: blue
                     tap_action:
                       action: toggle
-              - square: false
-                type: grid
-                cards:
-                  - type: custom:button-card
-                    entity: sensor.prusa_mini
-                    name: Prusa Mini+
-                    label: |
-                      [[[
-                        if (entity.state == "unknown") return "Off";
-                        else return states["sensor.prusa_mini"].state;
-                      ]]]
-                    template: nav_button_small
-                    variables:
-                      navigation_path: server#3d-printer
-                      state_off: unknown
-                      state_on: printing
-                      icon_on: mdi:printer-3d
-                      icon_off: mdi:printer-3d-off
-                      background_color_on: var(--purple)
-                      background_color_off: var(--contrast2)
-                      color_on: var(--black)
-                      color_off: var(--contrast20)
-                columns: 2
+              # - square: false
+              #   type: grid
+              #   cards:
+              #     - type: custom:button-card
+              #       entity: sensor.prusa_mini
+              #       name: Prusa Mini+
+              #       label: |
+              #         [[[
+              #           if (entity.state == "unknown") return "Off";
+              #           else return states["sensor.prusa_mini"].state;
+              #         ]]]
+              #       template: nav_button_small
+              #       variables:
+              #         navigation_path: server#3d-printer
+              #         state_off: unknown
+              #         state_on: printing
+              #         icon_on: mdi:printer-3d
+              #         icon_off: mdi:printer-3d-off
+              #         background_color_on: var(--purple)
+              #         background_color_off: var(--contrast2)
+              #         color_on: var(--black)
+              #         color_off: var(--contrast20)
+              #   columns: 2
               - square: false
                 type: grid
                 cards:
@@ -15048,7 +15048,7 @@ views:
                           border-radius: none;
                         }
                   - type: custom:button-card
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     name: Dobby
                     icon: |
                       [[[
@@ -15074,8 +15074,8 @@ views:
                       action: call-service
                       service: vacuum.return_to_base
                       service_data:
-                        entity_id: vacuum.dobby
-                    label: '[[[ return states["vacuum.dobby"].state ]]]'
+                        entity_id: vacuum.robovac_x10_pro_omni
+                    label: '[[[ return states["vacuum.robovac_x10_pro_omni"].state ]]]'
                     custom_fields:
                       icon1:
                         card:
@@ -15234,11 +15234,11 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     icon: mdi:pause
                     label: Start
                     name: >-
-                      [[[return states["vacuum.dobby"].attributes.battery_level
+                      [[[return states["vacuum.robovac_x10_pro_omni"].attributes.battery_level
                       + "% Battery"]]]
                     template: button_template
                     variables:
@@ -15253,7 +15253,7 @@ views:
                       action: call-service
                       service: vacuum.start
                       service_data:
-                        entity_id: vacuum.dobby
+                        entity_id: vacuum.robovac_x10_pro_omni
                       haptic: success
                   - type: custom:button-card
                     entity: input_boolean.readytoclean
@@ -15264,16 +15264,16 @@ views:
                       color: var(--purple)
                     name: Scheduled cleaning
                   - type: custom:button-card
-                    entity: vacuum.dobby
+                    entity: vacuum.robovac_x10_pro_omni
                     icon: mdi:home-variant
-                    name: '[[[ return "Currently " + states["vacuum.dobby"].state ]]]'
+                    name: '[[[ return "Currently " + states["vacuum.robovac_x10_pro_omni"].state ]]]'
                     label: Return
                     show_label: true
                     tap_action:
                       action: call-service
                       service: vacuum.return_to_base
                       service_data:
-                        entity_id: vacuum.dobby
+                        entity_id: vacuum.robovac_x10_pro_omni
                       haptic: success
                     template: button_template
                     variables:
@@ -15817,7 +15817,7 @@ views:
                       color_on: var(--black)
                       color_off: var(--contrast20)
                   - type: custom:button-card
-                    entity: input_boolean.notifications_julians_iphone
+                    entity: input_boolean.notifications_mehrose_phone
                     name: My Notifications
                     template: switch_template
                     variables:
@@ -16211,7 +16211,7 @@ views:
                       color_on: var(--black)
                       color_off: var(--contrast20)
                   - type: custom:button-card
-                    entity: input_boolean.notifications_anna
+                    entity: input_boolean.notifications_vidushi
                     icon: mdi:cellphone-message-off
                     name: My Notifications
                     template: switch_template
@@ -16409,14 +16409,14 @@ views:
             {{ states("input_text.ai_morning_brief") }}
           {% elif (states("sensor.time_of_day") == "day") %}
             # Hey, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
           {% elif (states("sensor.time_of_day") == "evening") %}
             # Good Evening, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% elif (states("sensor.time_of_day") == "night") %}
             # Good Night, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% endif %}
         visibility:
@@ -16442,13 +16442,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_julians_iphone
+        entity: input_boolean.notifications_mehrose_phone
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_julians_iphone
+            entity: input_boolean.notifications_mehrose_phone
             state: 'off'
           - condition: user
             users:
@@ -16457,13 +16457,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_anna
+        entity: input_boolean.notifications_vidushi
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_anna
+            entity: input_boolean.notifications_vidushi
             state: 'off'
           - condition: user
             users:
@@ -16580,32 +16580,32 @@ views:
           - condition: state
             entity: sensor.washing_machine_status
             state_not: 'Off'
+      # - type: entity
+      #   show_name: false
+      #   show_state: true
+      #   show_icon: true
+      #   entity: sensor.prusalink_progress
+      #   icon: mdi:printer-3d
+      #   color: orange
+      #   visibility:
+      #     - condition: state
+      #       entity: sensor.prusalink
+      #       state: printing
+      #     - condition: user
+      #       users:
+      #         - 3eea636aa3de4c7f9c662ad29c6e92e0
+      #   tap_action:
+      #     action: navigate
+      #     navigation_path: server#3d-printer
       - type: entity
         show_name: false
         show_state: true
         show_icon: true
-        entity: sensor.prusalink_progress
-        icon: mdi:printer-3d
-        color: orange
-        visibility:
-          - condition: state
-            entity: sensor.prusalink
-            state: printing
-          - condition: user
-            users:
-              - 3eea636aa3de4c7f9c662ad29c6e92e0
-        tap_action:
-          action: navigate
-          navigation_path: server#3d-printer
-      - type: entity
-        show_name: false
-        show_state: true
-        show_icon: true
-        entity: vacuum.dobby
+        entity: vacuum.robovac_x10_pro_omni
         color: purple
         visibility:
           - condition: state
-            entity: vacuum.dobby
+            entity: vacuum.robovac_x10_pro_omni
             state_not: docked
         tap_action:
           action: navigate
@@ -16614,13 +16614,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: switch.fan_outlet
+        entity: switch.air_circulator_horizontally_oscillating
         color: blue
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: switch.fan_outlet
+            entity: switch.air_circulator_horizontally_oscillating
             state: 'on'
       - type: entity
         show_name: false
@@ -16662,7 +16662,7 @@ views:
                   - entity: alarm_control_panel.security_system
                     state_not: triggered
                   - condition: state
-                    entity: person.julian_
+                    entity: person.mehrose
                     state: home
               - condition: state
                 entity: input_boolean.sound_alarm_is_running
@@ -16834,8 +16834,8 @@ views:
           - condition: screen
             media_query: '(min-width: 768px)'
       - type: custom:mushroom-template-badge
-        entity: person.julian_
-        picture: '{{ state_attr("person.julian_","entity_picture") }}'
+        entity: person.mehrose
+        picture: '{{ state_attr("person.mehrose","entity_picture") }}'
         content: '{{ states("sensor.julians_apple_watch_area") }}'
         label: Julian
         visibility:
@@ -19065,14 +19065,14 @@ views:
             {{ states("input_text.ai_morning_brief") }}
           {% elif (states("sensor.time_of_day") == "day") %}
             # Hey, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
           {% elif (states("sensor.time_of_day") == "evening") %}
             # Good Evening, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% elif (states("sensor.time_of_day") == "night") %}
             # Good Night, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% endif %}
         visibility:
@@ -19098,13 +19098,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_julians_iphone
+        entity: input_boolean.notifications_mehrose_phone
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_julians_iphone
+            entity: input_boolean.notifications_mehrose_phone
             state: 'off'
           - condition: user
             users:
@@ -19113,13 +19113,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_anna
+        entity: input_boolean.notifications_vidushi
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_anna
+            entity: input_boolean.notifications_vidushi
             state: 'off'
           - condition: user
             users:
@@ -19236,32 +19236,32 @@ views:
           - condition: state
             entity: sensor.washing_machine_status
             state_not: 'Off'
+      # - type: entity
+      #   show_name: false
+      #   show_state: true
+      #   show_icon: true
+      #   entity: sensor.prusalink_progress
+      #   icon: mdi:printer-3d
+      #   color: orange
+      #   visibility:
+      #     - condition: state
+      #       entity: sensor.prusalink
+      #       state: printing
+      #     - condition: user
+      #       users:
+      #         - 3eea636aa3de4c7f9c662ad29c6e92e0
+      #   tap_action:
+      #     action: navigate
+      #     navigation_path: server#3d-printer
       - type: entity
         show_name: false
         show_state: true
         show_icon: true
-        entity: sensor.prusalink_progress
-        icon: mdi:printer-3d
-        color: orange
-        visibility:
-          - condition: state
-            entity: sensor.prusalink
-            state: printing
-          - condition: user
-            users:
-              - 3eea636aa3de4c7f9c662ad29c6e92e0
-        tap_action:
-          action: navigate
-          navigation_path: server#3d-printer
-      - type: entity
-        show_name: false
-        show_state: true
-        show_icon: true
-        entity: vacuum.dobby
+        entity: vacuum.robovac_x10_pro_omni
         color: purple
         visibility:
           - condition: state
-            entity: vacuum.dobby
+            entity: vacuum.robovac_x10_pro_omni
             state_not: docked
         tap_action:
           action: navigate
@@ -19270,13 +19270,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: switch.fan_outlet
+        entity: switch.air_circulator_horizontally_oscillating
         color: blue
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: switch.fan_outlet
+            entity: switch.air_circulator_horizontally_oscillating
             state: 'on'
       - type: entity
         show_name: false
@@ -19318,7 +19318,7 @@ views:
                   - entity: alarm_control_panel.security_system
                     state_not: triggered
                   - condition: state
-                    entity: person.julian_
+                    entity: person.mehrose
                     state: home
               - condition: state
                 entity: input_boolean.sound_alarm_is_running
@@ -19490,8 +19490,8 @@ views:
           - condition: screen
             media_query: '(min-width: 768px)'
       - type: custom:mushroom-template-badge
-        entity: person.julian_
-        picture: '{{ state_attr("person.julian_","entity_picture") }}'
+        entity: person.mehrose
+        picture: '{{ state_attr("person.mehrose","entity_picture") }}'
         content: '{{ states("sensor.julians_apple_watch_area") }}'
         label: Julian
         visibility:
@@ -19545,7 +19545,7 @@ views:
                           item1:
                             card:
                               type: custom:button-card
-                              entity: person.julian_
+                              entity: person.mehrose
                               show_label: false
                               show_state: true
                               show_entity_picture: true
@@ -19584,7 +19584,7 @@ views:
                           item2:
                             card:
                               type: custom:button-card
-                              entity: person.anna
+                              entity: person.vidushi
                               show_label: false
                               show_state: true
                               show_entity_picture: true
@@ -19956,7 +19956,7 @@ views:
                   - type: entity
                     show_state: false
                     show_icon: true
-                    entity: person.julian_
+                    entity: person.mehrose
                     icon: mdi:face-agent
                     color: green
                     tap_action:
@@ -19964,7 +19964,7 @@ views:
                   - type: entity
                     show_state: false
                     show_icon: true
-                    entity: person.anna
+                    entity: person.vidushi
                     icon: mdi:face-woman
                     color: purple
                     tap_action:
@@ -19997,7 +19997,7 @@ views:
               columns: full
           - type: map
             entities:
-              - entity: person.julian_
+              - entity: person.mehrose
               - entity: person.dog
               - entity: zone.home
             theme_mode: auto
@@ -20024,7 +20024,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.julian_
+                    entity: person.mehrose
                     tap_action:
                       action: more-info
                     state:
@@ -20112,7 +20112,7 @@ views:
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.julian_'].state;
+                              return states['person.mehrose'].state;
                             ]]]
                           state:
                             - value: home
@@ -20177,7 +20177,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.anna
+                    entity: person.vidushi
                     tap_action:
                       action: more-info
                     state:
@@ -20259,11 +20259,11 @@ views:
                       state:
                         card:
                           type: custom:button-card
-                          entity: person.anna
+                          entity: person.vidushi
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.anna'].state;
+                              return states['person.vidushi'].state;
                             ]]]
                           state:
                             - value: home
@@ -21261,7 +21261,7 @@ views:
                     card:
                       type: custom:button-card
                       name: Julian
-                      entity: person.julian_
+                      entity: person.mehrose
                       show_entity_picture: true
                       show_state: true
                       styles:
@@ -21300,7 +21300,7 @@ views:
                     card:
                       type: custom:button-card
                       name: Anna
-                      entity: person.anna
+                      entity: person.vidushi
                       show_entity_picture: true
                       show_state: true
                       styles:
@@ -21954,7 +21954,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.julian_
+                    entity: person.mehrose
                     state:
                       - value: not_home
                         styles:
@@ -22045,11 +22045,11 @@ views:
                       state:
                         card:
                           type: custom:button-card
-                          entity: person.julian_
+                          entity: person.mehrose
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.julian_'].state;
+                              return states['person.mehrose'].state;
                             ]]]
                           state:
                             - value: home
@@ -22113,7 +22113,7 @@ views:
                     show_state: false
                     show_icon: true
                     show_entity_picture: true
-                    entity: person.anna
+                    entity: person.vidushi
                     state:
                       - value: not_home
                         styles:
@@ -22203,11 +22203,11 @@ views:
                       state:
                         card:
                           type: custom:button-card
-                          entity: person.anna
+                          entity: person.vidushi
                           show_icon: false
                           name: |
                             [[[ 
-                              return states['person.anna'].state;
+                              return states['person.vidushi'].state;
                             ]]]
                           state:
                             - value: home
@@ -22750,7 +22750,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: person.julian_
+                    entity: person.mehrose
                     show_entity_picture: true
                     show_name: false
                     tap_action:
@@ -22783,10 +22783,10 @@ views:
                       info:
                         card:
                           type: custom:button-card
-                          entity: person.julian_
+                          entity: person.mehrose
                           name: Julian
                           show_entity_picture: true
-                          label: '[[[return states["person.julian_"].state]]]'
+                          label: '[[[return states["person.mehrose"].state]]]'
                           show_label: true
                           state:
                             - value: home
@@ -22914,7 +22914,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: person.anna
+                    entity: person.vidushi
                     show_entity_picture: true
                     show_name: false
                     tap_action:
@@ -22947,10 +22947,10 @@ views:
                       info:
                         card:
                           type: custom:button-card
-                          entity: person.anna
+                          entity: person.vidushi
                           name: Anna
                           show_entity_picture: true
-                          label: '[[[return states["person.anna"].state]]]'
+                          label: '[[[return states["person.vidushi"].state]]]'
                           show_label: true
                           state:
                             - value: home
@@ -23738,14 +23738,14 @@ views:
             {{ states("input_text.ai_morning_brief") }}
           {% elif (states("sensor.time_of_day") == "day") %}
             # Hey, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
           {% elif (states("sensor.time_of_day") == "evening") %}
             # Good Evening, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% elif (states("sensor.time_of_day") == "night") %}
             # Good Night, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% endif %}
         visibility:
@@ -23771,13 +23771,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_julians_iphone
+        entity: input_boolean.notifications_mehrose_phone
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_julians_iphone
+            entity: input_boolean.notifications_mehrose_phone
             state: 'off'
           - condition: user
             users:
@@ -23786,13 +23786,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_anna
+        entity: input_boolean.notifications_vidushi
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_anna
+            entity: input_boolean.notifications_vidushi
             state: 'off'
           - condition: user
             users:
@@ -23909,32 +23909,32 @@ views:
           - condition: state
             entity: sensor.washing_machine_status
             state_not: 'Off'
+      # - type: entity
+      #   show_name: false
+      #   show_state: true
+      #   show_icon: true
+      #   entity: sensor.prusalink_progress
+      #   icon: mdi:printer-3d
+      #   color: orange
+      #   visibility:
+      #     - condition: state
+      #       entity: sensor.prusalink
+      #       state: printing
+      #     - condition: user
+      #       users:
+      #         - 3eea636aa3de4c7f9c662ad29c6e92e0
+      #   tap_action:
+      #     action: navigate
+      #     navigation_path: server#3d-printer
       - type: entity
         show_name: false
         show_state: true
         show_icon: true
-        entity: sensor.prusalink_progress
-        icon: mdi:printer-3d
-        color: orange
-        visibility:
-          - condition: state
-            entity: sensor.prusalink
-            state: printing
-          - condition: user
-            users:
-              - 3eea636aa3de4c7f9c662ad29c6e92e0
-        tap_action:
-          action: navigate
-          navigation_path: server#3d-printer
-      - type: entity
-        show_name: false
-        show_state: true
-        show_icon: true
-        entity: vacuum.dobby
+        entity: vacuum.robovac_x10_pro_omni
         color: purple
         visibility:
           - condition: state
-            entity: vacuum.dobby
+            entity: vacuum.robovac_x10_pro_omni
             state_not: docked
         tap_action:
           action: navigate
@@ -23943,13 +23943,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: switch.fan_outlet
+        entity: switch.air_circulator_horizontally_oscillating
         color: blue
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: switch.fan_outlet
+            entity: switch.air_circulator_horizontally_oscillating
             state: 'on'
       - type: entity
         show_name: false
@@ -23991,7 +23991,7 @@ views:
                   - entity: alarm_control_panel.security_system
                     state_not: triggered
                   - condition: state
-                    entity: person.julian_
+                    entity: person.mehrose
                     state: home
               - condition: state
                 entity: input_boolean.sound_alarm_is_running
@@ -24163,8 +24163,8 @@ views:
           - condition: screen
             media_query: '(min-width: 768px)'
       - type: custom:mushroom-template-badge
-        entity: person.julian_
-        picture: '{{ state_attr("person.julian_","entity_picture") }}'
+        entity: person.mehrose
+        picture: '{{ state_attr("person.mehrose","entity_picture") }}'
         content: '{{ states("sensor.julians_apple_watch_area") }}'
         label: Julian
         visibility:
@@ -24311,51 +24311,51 @@ views:
                           tap_action:
                             action: navigate
                             navigation_path: energy
-                      item4:
-                        card:
-                          type: custom:button-card
-                          entity: sensor.prusalink_progress
-                          icon: mdi:printer-3d
-                          name: Prusa Mini+
-                          label: >-
-                            [[[ return states["sensor.prusalink_progress"].state
-                            + '%' ]]]
-                          show_label: true
-                          state:
-                            - value: unavailable
-                              label: 'Off'
-                              icon: mdi:printer-3d-off
-                          styles:
-                            card:
-                              - border-radius: 0px
-                              - box-shadow: none
-                              - padding-right: 5px
-                              - background: none
-                            grid:
-                              - grid-template-areas: '''i n'' ''i l'''
-                              - grid-template-columns: min-content
-                              - column-gap: 10px
-                            icon:
-                              - width: 20px
-                              - color: |
-                                  [[[
-                                    if (states['sensor.prusalink_progress'].state == "unavailable") return "var(--contrast10)";
-                                    else return "var(--purple)";
-                                  ]]]
-                            img_cell:
-                              - width: 20px
-                            name:
-                              - justify-self: start
-                              - font-size: 10px
-                              - font-weight: 500
-                              - color: var(--contrast14)
-                            label:
-                              - justify-self: start
-                              - font-size: 15px
-                              - font-weight: 700
-                          tap_action:
-                            action: navigate
-                            navigation_path: '#3d-printer'
+                      # item4:
+                      #   card:
+                      #     type: custom:button-card
+                      #     entity: sensor.prusalink_progress
+                      #     icon: mdi:printer-3d
+                      #     name: Prusa Mini+
+                      #     label: >-
+                      #       [[[ return states["sensor.prusalink_progress"].state
+                      #       + '%' ]]]
+                      #     show_label: true
+                      #     state:
+                      #       - value: unavailable
+                      #         label: 'Off'
+                      #         icon: mdi:printer-3d-off
+                      #     styles:
+                      #       card:
+                      #         - border-radius: 0px
+                      #         - box-shadow: none
+                      #         - padding-right: 5px
+                      #         - background: none
+                      #       grid:
+                      #         - grid-template-areas: '''i n'' ''i l'''
+                      #         - grid-template-columns: min-content
+                      #         - column-gap: 10px
+                      #       icon:
+                      #         - width: 20px
+                      #         - color: |
+                      #             [[[
+                      #               if (states['sensor.prusalink_progress'].state == "unavailable") return "var(--contrast10)";
+                      #               else return "var(--purple)";
+                      #             ]]]
+                      #       img_cell:
+                      #         - width: 20px
+                      #       name:
+                      #         - justify-self: start
+                      #         - font-size: 10px
+                      #         - font-weight: 500
+                      #         - color: var(--contrast14)
+                      #       label:
+                      #         - justify-self: start
+                      #         - font-size: 15px
+                      #         - font-weight: 700
+                      #     tap_action:
+                      #       action: navigate
+                      #       navigation_path: '#3d-printer'
                       item5:
                         card:
                           type: custom:button-card
@@ -26536,464 +26536,464 @@ views:
                             0.5em;opacity:0.7">${uni}</span>
                               `
                             ]]]
-          - type: vertical-stack
-            cards:
-              - type: custom:bubble-card
-                card_type: pop-up
-                hash: '#3d-printer'
-                button_type: name
-                name: 3d Printer
-                icon: mdi:printer-3d
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: sensor.prusalink
-                    state: printing
-                card:
-                  show_state: false
-                  show_name: false
-                  camera_view: auto
-                  type: picture-entity
-                  entity: camera.prusalink_preview
-                  camera_image: camera.prusalink_preview
-                  tap_action:
-                    action: more-info
-              - type: custom:button-card
-                entity: sensor.prusalink
-                name: |
-                  [[[
-                    if (states['sensor.prusalink'].state == 'printing') {
-                      return states['sensor.prusalink_filename'].state;
-                    } else {
-                      return 'Prusa Mini+';
-                    }
-                  ]]]
-                icon: mdi:printer-3d
-                show_name: true
-                show_icon: true
-                show_label: true
-                show_state: false
-                tap_action:
-                  action: more-info
-                hold_action:
-                  action: more-info
-                label: |
-                  [[[
-                    if (states['sensor.prusalink'].state != 'unavailable') {
-                      return states['sensor.prusalink'].state;
-                    } else {
-                      return 'Off';
-                    }
-                  ]]]
-                custom_fields:
-                  bar: |
-                    [[[
-                      var color = "var(--green)";
-                      var state = states['sensor.prusalink_progress'].state;
-                      if (state < 10) color = "var(--red)";
-                      else if (state < 50) color = "var(--yellow)";
-                      else if (state < 90) color = "var(--orange)";
-                      return `
-                      <div>
-                      <div style="background:${color}; height: 12px; width:${state}%">
-                      </div>
-                      </div>`
-                    ]]]
-                  rem:
-                    card:
-                      type: conditional
-                      conditions:
-                        - condition: state
-                          entity: sensor.prusalink
-                          state: printing
-                      card:
-                        type: custom:button-card
-                        entity: sensor.prusamini_timer
-                        name: |
-                          [[[
-                           var remainingTime = states['sensor.prusamini_timer'].attributes.remaining;
-                           return `Time: ${remainingTime}`;
-                          ]]]
-                        show_icon: false
-                        styles:
-                          card:
-                            - width: min
-                            - background: none
-                            - overflow: visible
-                          name:
-                            - font-size: 12px
-                            - color: |
-                                [[[
-                                  if (entity.state == 'on') {
-                                    return 'var(--black)';
-                                  } else {
-                                    return 'var(--primary-background-color)';
-                                  }
-                                ]]]
-                            - font-weight: 500
-                  start:
-                    card:
-                      type: conditional
-                      conditions:
-                        - condition: state
-                          entity: sensor.prusa_mini
-                          state: printing
-                      card:
-                        type: custom:button-card
-                        entity: sensor.prusamini_timer
-                        name: |
-                          [[[
-                           var endTime = states['sensor.prusamini_timer'].attributes.triggered;
-                           // Extract time from the end time
-                           var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
-                           return `${time} Uhr`;
-                           ]]]
-                        show_icon: false
-                        styles:
-                          card:
-                            - width: min
-                            - padding: 5px
-                            - background: none
-                          name:
-                            - font-size: 12px
-                            - color: |
-                                [[[
-                                  if (entity.state == 'on') {
-                                    return 'var(--black)';
-                                  } else {
-                                    return 'var(--primary-background-color)';
-                                  }
-                                ]]]
-                  end:
-                    card:
-                      type: conditional
-                      conditions:
-                        - condition: state
-                          entity: sensor.prusalink
-                          state: printing
-                      card:
-                        type: custom:button-card
-                        entity: sensor.prusamini_timer
-                        name: |
-                          [[[
-                           var endTime = states['sensor.prusamini_timer'].attributes.end_time;
-                           // Extract time from the end time
-                           var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
-                           return `${time} Uhr`;
-                           ]]]
-                        show_icon: false
-                        styles:
-                          card:
-                            - width: min
-                            - padding: 5px
-                            - background: none
-                          name:
-                            - font-size: 12px
-                            - color: |
-                                [[[
-                                  if (entity.state == 'on') {
-                                    return 'var(--black)';
-                                  } else {
-                                    return 'var(--primary-background-color)';
-                                  }
-                                ]]]
-                  icon1:
-                    card:
-                      type: custom:button-card
-                      icon: mdi:printer-3d
-                      styles:
-                        card:
-                          - background-color: var(--contrast1)
-                          - width: 30px
-                          - height: 30px
-                        icon:
-                          - width: 18px
-                          - color: var(--contrast20)
-                styles:
-                  grid:
-                    - grid-template-areas: '". icon1" "l l" "n n" "rem rem" "bar bar" "start end"'
-                    - grid-template-rows: 24px 1fr 24px min-content min-content min-content
-                    - grid-template-columns: 60% 40%
-                  card:
-                    - height: 100%
-                    - padding: 1rem
-                    - background: |
-                        [[[
-                          if (entity.state == 'printing') {
-                            return 'var(--purple)';
-                          } else if (entity.state == 'attention') {
-                            return 'var(--red)';
-                          } else if (entity.state == 'error') {
-                            return 'var(--red)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--green)';
-                          } else {
-                            return 'var(--contrast2)';
-                          }
-                        ]]]
-                  img_cell:
-                    - position: absolute
-                    - top: 20%
-                    - left: 40%
-                    - overflow: visible
-                  icon:
-                    - position: absolute
-                    - width: 20em
-                    - opacity: 20%
-                    - color: |
-                        [[[
-                          if (entity.state == 'printing') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'attention') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'error') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--black)';
-                          } else {
-                            return 'var(--contrast20)';
-                          }
-                        ]]]
-                    - transform: rotate(-20deg)
-                  label:
-                    - text-align: left
-                    - font-size: 18px
-                    - font-weight: 500
-                    - justify-self: start
-                    - align-self: end
-                    - overflow: visible
-                    - color: |
-                        [[[
-                          if (entity.state == 'printing') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'attention') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'error') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--black)';
-                          } else {
-                            return 'var(--contrast20)';
-                          }
-                        ]]]
-                  name:
-                    - text-align: left
-                    - font-size: 12px
-                    - opacity: 0.7
-                    - justify-self: start
-                    - align-self: center
-                    - overflow: visible
-                    - color: |
-                        [[[
-                          if (entity.state == 'printing') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'attention') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'error') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--black)';
-                          } else {
-                            return 'var(--contrast20)';
-                          }
-                        ]]]
-                  custom_fields:
-                    bar:
-                      - justify-self: start
-                      - width: 100%
-                      - height: |
-                          [[[
-                            if (entity.state == 'printing') {
-                              return '12px';
-                            } else {
-                              return '0px';
-                            }
-                          ]]]
-                      - background: var(--contrast1)
-                      - border-radius: 24px
-                    end:
-                      - justify-self: end
-                    start:
-                      - justify-self: start
-                    rem:
-                      - justify-self: start
-                      - align-self: end
-                      - height: |
-                          [[[
-                            if (entity.state == 'printing') {
-                              return '27px';
-                            } else {
-                              return '0px';
-                            }
-                          ]]]
-                    icon1:
-                      - justify-self: end
-                      - width: 24px
-                      - color: |
-                          [[[
-                            if (entity.state == 'printing') {
-                              return 'var(--black)';
-                            } else if (entity.state == 'attention') {
-                              return 'var(--black)';
-                            } else if (entity.state == 'error') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--black)';
-                            } else {
-                              return 'var(--contrast20)';
-                            }
-                          ]]]
-                    icon2:
-                      - justify-self: end
-                      - align-self: end
-                      - width: 24px
-                      - color: |
-                          [[[
-                            if (entity.state == 'printing') {
-                              return 'var(--black)';
-                            } else if (entity.state == 'attention') {
-                              return 'var(--black)';
-                            } else if (entity.state == 'error') {
-                            return 'var(--black)';
-                          } else if (entity.state == 'finished') {
-                            return 'var(--black)';
-                            } else {
-                              return 'var(--contrast20)';
-                            }
-                          ]]]
-                  hold_action:
-                    action: more-info
-              - type: conditional
-                conditions:
-                  - condition: state
-                    entity: sensor.prusalink_progress
-                    state_not: unavailable
-                card:
-                  square: false
-                  columns: 3
-                  type: grid
-                  cards:
-                    - type: custom:button-card
-                      template: button_template
-                      entity: button.prusalink_resume_job
-                      icon: mdi:play
-                      name: Print
-                      label: Start
-                      tap_action:
-                        action: toggle
-                      variables:
-                        icon2: mdi:play
-                        background_color_off: var(--green)
-                        color_off: var(--contrast1)
-                    - type: custom:button-card
-                      template: button_template
-                      entity: button.prusalink_pause_job
-                      icon: mdi:play
-                      name: Print
-                      label: Pause
-                      tap_action:
-                        action: toggle
-                      variables:
-                        icon2: mdi:pause
-                        background_color_off: var(--yellow)
-                        color_off: var(--contrast1)
-                    - type: custom:button-card
-                      template: button_template
-                      entity: button.prusalink_cancel_job
-                      icon: mdi:stop
-                      name: Print
-                      label: Stop
-                      tap_action:
-                        action: toggle
-                      variables:
-                        icon2: mdi:stop
-                        background_color_off: var(--red)
-                        color_off: var(--contrast1)
-                    - type: custom:button-card
-                      entity: sensor.prusalink_nozzle_temperature
-                      template: custom_card_sensor_small
-                      name: Nozzle Temp
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' °C';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-                    - type: custom:button-card
-                      entity: sensor.prusalink_heatbed_temperature
-                      template: custom_card_sensor_small
-                      name: Bed Temp
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' °C';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-                    - type: custom:button-card
-                      entity: sensor.prusalink_progress
-                      template: custom_card_sensor_small
-                      name: Job Done
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' %';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-                    - type: custom:button-card
-                      entity: sensor.prusalink_nozzle_target_temperature
-                      template: custom_card_sensor_small
-                      name: Target Nozzle Temp
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' °C';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-                    - type: custom:button-card
-                      entity: sensor.prusalink_heatbed_target_temperature
-                      template: custom_card_sensor_small
-                      name: Target Bed Temp
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' °C';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-                    - type: custom:button-card
-                      entity: sensor.prusalink_material
-                      template: custom_card_sensor_small
-                      name: Material
-                      variables:
-                        state: |
-                          [[[ 
-                            var st = states[entity.entity_id].state;
-                            var uni = ' ';
-                            return `
-                            ${st}<span style="font-size:
-                          0.5em;opacity:0.7">${uni}</span>
-                            `
-                          ]]]
-        column_span: 3
+          # - type: vertical-stack
+          #   cards:
+          #     - type: custom:bubble-card
+          #       card_type: pop-up
+          #       hash: '#3d-printer'
+          #       button_type: name
+          #       name: 3d Printer
+          #       icon: mdi:printer-3d
+          #     - type: conditional
+          #       conditions:
+          #         - condition: state
+          #           entity: sensor.prusalink
+          #           state: printing
+          #       card:
+          #         show_state: false
+          #         show_name: false
+          #         camera_view: auto
+          #         type: picture-entity
+          #         entity: camera.prusalink_preview
+          #         camera_image: camera.prusalink_preview
+          #         tap_action:
+          #           action: more-info
+          #     - type: custom:button-card
+          #       entity: sensor.prusalink
+          #       name: |
+          #         [[[
+          #           if (states['sensor.prusalink'].state == 'printing') {
+          #             return states['sensor.prusalink_filename'].state;
+          #           } else {
+          #             return 'Prusa Mini+';
+          #           }
+          #         ]]]
+          #       icon: mdi:printer-3d
+          #       show_name: true
+          #       show_icon: true
+          #       show_label: true
+          #       show_state: false
+          #       tap_action:
+          #         action: more-info
+          #       hold_action:
+          #         action: more-info
+          #       label: |
+          #         [[[
+          #           if (states['sensor.prusalink'].state != 'unavailable') {
+          #             return states['sensor.prusalink'].state;
+          #           } else {
+          #             return 'Off';
+          #           }
+          #         ]]]
+          #       custom_fields:
+          #         bar: |
+          #           [[[
+          #             var color = "var(--green)";
+          #             var state = states['sensor.prusalink_progress'].state;
+          #             if (state < 10) color = "var(--red)";
+          #             else if (state < 50) color = "var(--yellow)";
+          #             else if (state < 90) color = "var(--orange)";
+          #             return `
+          #             <div>
+          #             <div style="background:${color}; height: 12px; width:${state}%">
+          #             </div>
+          #             </div>`
+          #           ]]]
+          #         rem:
+          #           card:
+          #             type: conditional
+          #             conditions:
+          #               - condition: state
+          #                 entity: sensor.prusalink
+          #                 state: printing
+          #             card:
+          #               type: custom:button-card
+          #               entity: sensor.prusamini_timer
+          #               name: |
+          #                 [[[
+          #                  var remainingTime = states['sensor.prusamini_timer'].attributes.remaining;
+          #                  return `Time: ${remainingTime}`;
+          #                 ]]]
+          #               show_icon: false
+          #               styles:
+          #                 card:
+          #                   - width: min
+          #                   - background: none
+          #                   - overflow: visible
+          #                 name:
+          #                   - font-size: 12px
+          #                   - color: |
+          #                       [[[
+          #                         if (entity.state == 'on') {
+          #                           return 'var(--black)';
+          #                         } else {
+          #                           return 'var(--primary-background-color)';
+          #                         }
+          #                       ]]]
+          #                   - font-weight: 500
+          #         start:
+          #           card:
+          #             type: conditional
+          #             conditions:
+          #               - condition: state
+          #                 entity: sensor.prusa_mini
+          #                 state: printing
+          #             card:
+          #               type: custom:button-card
+          #               entity: sensor.prusamini_timer
+          #               name: |
+          #                 [[[
+          #                  var endTime = states['sensor.prusamini_timer'].attributes.triggered;
+          #                  // Extract time from the end time
+          #                  var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+          #                  return `${time} Uhr`;
+          #                  ]]]
+          #               show_icon: false
+          #               styles:
+          #                 card:
+          #                   - width: min
+          #                   - padding: 5px
+          #                   - background: none
+          #                 name:
+          #                   - font-size: 12px
+          #                   - color: |
+          #                       [[[
+          #                         if (entity.state == 'on') {
+          #                           return 'var(--black)';
+          #                         } else {
+          #                           return 'var(--primary-background-color)';
+          #                         }
+          #                       ]]]
+          #         end:
+          #           card:
+          #             type: conditional
+          #             conditions:
+          #               - condition: state
+          #                 entity: sensor.prusalink
+          #                 state: printing
+          #             card:
+          #               type: custom:button-card
+          #               entity: sensor.prusamini_timer
+          #               name: |
+          #                 [[[
+          #                  var endTime = states['sensor.prusamini_timer'].attributes.end_time;
+          #                  // Extract time from the end time
+          #                  var time = new Date(endTime).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+          #                  return `${time} Uhr`;
+          #                  ]]]
+          #               show_icon: false
+          #               styles:
+          #                 card:
+          #                   - width: min
+          #                   - padding: 5px
+          #                   - background: none
+          #                 name:
+          #                   - font-size: 12px
+          #                   - color: |
+          #                       [[[
+          #                         if (entity.state == 'on') {
+          #                           return 'var(--black)';
+          #                         } else {
+          #                           return 'var(--primary-background-color)';
+          #                         }
+          #                       ]]]
+          #         icon1:
+          #           card:
+          #             type: custom:button-card
+          #             icon: mdi:printer-3d
+          #             styles:
+          #               card:
+          #                 - background-color: var(--contrast1)
+          #                 - width: 30px
+          #                 - height: 30px
+          #               icon:
+          #                 - width: 18px
+          #                 - color: var(--contrast20)
+          #       styles:
+          #         grid:
+          #           - grid-template-areas: '". icon1" "l l" "n n" "rem rem" "bar bar" "start end"'
+          #           - grid-template-rows: 24px 1fr 24px min-content min-content min-content
+          #           - grid-template-columns: 60% 40%
+          #         card:
+          #           - height: 100%
+          #           - padding: 1rem
+          #           - background: |
+          #               [[[
+          #                 if (entity.state == 'printing') {
+          #                   return 'var(--purple)';
+          #                 } else if (entity.state == 'attention') {
+          #                   return 'var(--red)';
+          #                 } else if (entity.state == 'error') {
+          #                   return 'var(--red)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--green)';
+          #                 } else {
+          #                   return 'var(--contrast2)';
+          #                 }
+          #               ]]]
+          #         img_cell:
+          #           - position: absolute
+          #           - top: 20%
+          #           - left: 40%
+          #           - overflow: visible
+          #         icon:
+          #           - position: absolute
+          #           - width: 20em
+          #           - opacity: 20%
+          #           - color: |
+          #               [[[
+          #                 if (entity.state == 'printing') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'attention') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'error') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--black)';
+          #                 } else {
+          #                   return 'var(--contrast20)';
+          #                 }
+          #               ]]]
+          #           - transform: rotate(-20deg)
+          #         label:
+          #           - text-align: left
+          #           - font-size: 18px
+          #           - font-weight: 500
+          #           - justify-self: start
+          #           - align-self: end
+          #           - overflow: visible
+          #           - color: |
+          #               [[[
+          #                 if (entity.state == 'printing') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'attention') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'error') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--black)';
+          #                 } else {
+          #                   return 'var(--contrast20)';
+          #                 }
+          #               ]]]
+          #         name:
+          #           - text-align: left
+          #           - font-size: 12px
+          #           - opacity: 0.7
+          #           - justify-self: start
+          #           - align-self: center
+          #           - overflow: visible
+          #           - color: |
+          #               [[[
+          #                 if (entity.state == 'printing') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'attention') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'error') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--black)';
+          #                 } else {
+          #                   return 'var(--contrast20)';
+          #                 }
+          #               ]]]
+          #         custom_fields:
+          #           bar:
+          #             - justify-self: start
+          #             - width: 100%
+          #             - height: |
+          #                 [[[
+          #                   if (entity.state == 'printing') {
+          #                     return '12px';
+          #                   } else {
+          #                     return '0px';
+          #                   }
+          #                 ]]]
+          #             - background: var(--contrast1)
+          #             - border-radius: 24px
+          #           end:
+          #             - justify-self: end
+          #           start:
+          #             - justify-self: start
+          #           rem:
+          #             - justify-self: start
+          #             - align-self: end
+          #             - height: |
+          #                 [[[
+          #                   if (entity.state == 'printing') {
+          #                     return '27px';
+          #                   } else {
+          #                     return '0px';
+          #                   }
+          #                 ]]]
+          #           icon1:
+          #             - justify-self: end
+          #             - width: 24px
+          #             - color: |
+          #                 [[[
+          #                   if (entity.state == 'printing') {
+          #                     return 'var(--black)';
+          #                   } else if (entity.state == 'attention') {
+          #                     return 'var(--black)';
+          #                   } else if (entity.state == 'error') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--black)';
+          #                   } else {
+          #                     return 'var(--contrast20)';
+          #                   }
+          #                 ]]]
+          #           icon2:
+          #             - justify-self: end
+          #             - align-self: end
+          #             - width: 24px
+          #             - color: |
+          #                 [[[
+          #                   if (entity.state == 'printing') {
+          #                     return 'var(--black)';
+          #                   } else if (entity.state == 'attention') {
+          #                     return 'var(--black)';
+          #                   } else if (entity.state == 'error') {
+          #                   return 'var(--black)';
+          #                 } else if (entity.state == 'finished') {
+          #                   return 'var(--black)';
+          #                   } else {
+          #                     return 'var(--contrast20)';
+          #                   }
+          #                 ]]]
+          #         hold_action:
+          #           action: more-info
+          #     - type: conditional
+          #       conditions:
+          #         - condition: state
+          #           entity: sensor.prusalink_progress
+          #           state_not: unavailable
+          #       card:
+          #         square: false
+          #         columns: 3
+          #         type: grid
+          #         cards:
+          #           - type: custom:button-card
+          #             template: button_template
+          #             entity: button.prusalink_resume_job
+          #             icon: mdi:play
+          #             name: Print
+          #             label: Start
+          #             tap_action:
+          #               action: toggle
+          #             variables:
+          #               icon2: mdi:play
+          #               background_color_off: var(--green)
+          #               color_off: var(--contrast1)
+          #           - type: custom:button-card
+          #             template: button_template
+          #             entity: button.prusalink_pause_job
+          #             icon: mdi:play
+          #             name: Print
+          #             label: Pause
+          #             tap_action:
+          #               action: toggle
+          #             variables:
+          #               icon2: mdi:pause
+          #               background_color_off: var(--yellow)
+          #               color_off: var(--contrast1)
+          #           - type: custom:button-card
+          #             template: button_template
+          #             entity: button.prusalink_cancel_job
+          #             icon: mdi:stop
+          #             name: Print
+          #             label: Stop
+          #             tap_action:
+          #               action: toggle
+          #             variables:
+          #               icon2: mdi:stop
+          #               background_color_off: var(--red)
+          #               color_off: var(--contrast1)
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_nozzle_temperature
+          #             template: custom_card_sensor_small
+          #             name: Nozzle Temp
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' °C';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_heatbed_temperature
+          #             template: custom_card_sensor_small
+          #             name: Bed Temp
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' °C';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_progress
+          #             template: custom_card_sensor_small
+          #             name: Job Done
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' %';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_nozzle_target_temperature
+          #             template: custom_card_sensor_small
+          #             name: Target Nozzle Temp
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' °C';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_heatbed_target_temperature
+          #             template: custom_card_sensor_small
+          #             name: Target Bed Temp
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' °C';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          #           - type: custom:button-card
+          #             entity: sensor.prusalink_material
+          #             template: custom_card_sensor_small
+          #             name: Material
+          #             variables:
+          #               state: |
+          #                 [[[ 
+          #                   var st = states[entity.entity_id].state;
+          #                   var uni = ' ';
+          #                   return `
+          #                   ${st}<span style="font-size:
+          #                 0.5em;opacity:0.7">${uni}</span>
+          #                   `
+          #                 ]]]
+          # column_span: 3
     type: sections
     max_columns: 3
     path: server
@@ -27013,14 +27013,14 @@ views:
             {{ states("input_text.ai_morning_brief") }}
           {% elif (states("sensor.time_of_day") == "day") %}
             # Hey, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}.
           {% elif (states("sensor.time_of_day") == "evening") %}
             # Good Evening, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% elif (states("sensor.time_of_day") == "night") %}
             # Good Night, {{user}}!
-            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.home") | lower }} with {{ state_attr("weather.home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
+            It's {{ states("sensor.time") }}, the weather is {{ state_translated("weather.forecast_home") | lower }} with {{ state_attr("weather.forecast_home","temperature") }}°C. Right now there are {{ states("sensor.lights_on_count") }} lights on and {{ states("sensor.window_open_count") }} windows open. The security system is set to {{ state_translated("alarm_control_panel.security_system") }}; the flat door is {{ states("lock.flat_door") }}. {% if states("binary_sensor.is_alarm_on") == "on" %}Your alarm is set to {{ states("sensor.wake_time_1") }}.{% endif %} 
 
           {% endif %}
         visibility:
@@ -27046,13 +27046,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_julians_iphone
+        entity: input_boolean.notifications_mehrose_phone
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_julians_iphone
+            entity: input_boolean.notifications_mehrose_phone
             state: 'off'
           - condition: user
             users:
@@ -27061,13 +27061,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: input_boolean.notifications_anna
+        entity: input_boolean.notifications_vidushi
         color: primary
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: input_boolean.notifications_anna
+            entity: input_boolean.notifications_vidushi
             state: 'off'
           - condition: user
             users:
@@ -27184,32 +27184,32 @@ views:
           - condition: state
             entity: sensor.washing_machine_status
             state_not: 'Off'
+      # - type: entity
+      #   show_name: false
+      #   show_state: true
+      #   show_icon: true
+      #   entity: sensor.prusalink_progress
+      #   icon: mdi:printer-3d
+      #   color: orange
+      #   visibility:
+      #     - condition: state
+      #       entity: sensor.prusalink
+      #       state: printing
+      #     - condition: user
+      #       users:
+      #         - 3eea636aa3de4c7f9c662ad29c6e92e0
+      #   tap_action:
+      #     action: navigate
+      #     navigation_path: server#3d-printer
       - type: entity
         show_name: false
         show_state: true
         show_icon: true
-        entity: sensor.prusalink_progress
-        icon: mdi:printer-3d
-        color: orange
-        visibility:
-          - condition: state
-            entity: sensor.prusalink
-            state: printing
-          - condition: user
-            users:
-              - 3eea636aa3de4c7f9c662ad29c6e92e0
-        tap_action:
-          action: navigate
-          navigation_path: server#3d-printer
-      - type: entity
-        show_name: false
-        show_state: true
-        show_icon: true
-        entity: vacuum.dobby
+        entity: vacuum.robovac_x10_pro_omni
         color: purple
         visibility:
           - condition: state
-            entity: vacuum.dobby
+            entity: vacuum.robovac_x10_pro_omni
             state_not: docked
         tap_action:
           action: navigate
@@ -27218,13 +27218,13 @@ views:
         show_name: false
         show_state: false
         show_icon: true
-        entity: switch.fan_outlet
+        entity: switch.air_circulator_horizontally_oscillating
         color: blue
         tap_action:
           action: toggle
         visibility:
           - condition: state
-            entity: switch.fan_outlet
+            entity: switch.air_circulator_horizontally_oscillating
             state: 'on'
       - type: entity
         show_name: false
@@ -27266,7 +27266,7 @@ views:
                   - entity: alarm_control_panel.security_system
                     state_not: triggered
                   - condition: state
-                    entity: person.julian_
+                    entity: person.mehrose
                     state: home
               - condition: state
                 entity: input_boolean.sound_alarm_is_running
@@ -27438,8 +27438,8 @@ views:
           - condition: screen
             media_query: '(min-width: 768px)'
       - type: custom:mushroom-template-badge
-        entity: person.julian_
-        picture: '{{ state_attr("person.julian_","entity_picture") }}'
+        entity: person.mehrose
+        picture: '{{ state_attr("person.mehrose","entity_picture") }}'
         content: '{{ states("sensor.julians_apple_watch_area") }}'
         label: Julian
         visibility:
